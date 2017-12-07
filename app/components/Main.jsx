@@ -4,6 +4,8 @@ import CampusView from './CampusView';
 import StudentsView from './StudentsView';
 import { Link } from 'react-router-dom';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import singleCampus from './singleCampus';
+import singleStudent from './singleStudent';
 
 
 
@@ -23,8 +25,10 @@ export default class Main extends Component {
           <NavBar />
         </div>
         <Switch>
-          <Route path='/students' component={StudentsView}/>
-          <Route path='/campuses' component={CampusView}/>
+          <Route exact path='/students' component={StudentsView}/>
+          <Route path='/students/:id' component={singleStudent}/>
+          <Route exact path='/campuses' component={CampusView}/>
+          <Route path='/campuses/:id' component={singleCampus}/>
         </Switch>
         </div>
       </Router>

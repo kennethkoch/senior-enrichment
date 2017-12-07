@@ -1,12 +1,17 @@
 const campusRouter = require('express').Router()
 
+const db = require('../db')
+const Campus = require('../db/models').Campus
+
+
 campusRouter.get('/:id', (req, res)  => {
   const campusId = req.params.id
-  res.send('hiii' + campusId)
+  res.send('campuses here')
 })
 
 campusRouter.get('/', (req, res)  => {
-  res.send('hi')
+  Campus.findAll({where: req.query})
+  .then(allCampuses => res.json(allCampuses))
 })
 
 
