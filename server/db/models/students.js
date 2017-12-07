@@ -1,7 +1,7 @@
 const db = require('../index.js')
 const Sequelize = require('sequelize')
 
-const Student = db.define('students', {
+const Student = db.define('student', {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,

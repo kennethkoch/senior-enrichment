@@ -18,5 +18,5 @@ const Campus = db.define('campuses', {
 
 
 // fix this later
-
+console.log(Campus);
 module.exports = Campus

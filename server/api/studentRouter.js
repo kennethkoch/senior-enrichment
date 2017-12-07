@@ -8,6 +8,10 @@ studentRouter.get('/', (req, res)  => {
   res.send('hi')
 })
 
+studentRouter.get('/:id', (req, res) => {
+  res.send('hi' + req.params.id)
+})
+
 /**
 studentRouter.post()
 post a new student to db
