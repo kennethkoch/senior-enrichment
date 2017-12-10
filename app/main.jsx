@@ -7,10 +7,8 @@ import store from './store'
 import Root from './components/Root'
 
 render (
-    <Main />,
+  <Provider store={store}>
+    <Main />
+  </Provider>,
   document.getElementById('main')
 )
-/**
-<Provider store={store}>
-// </Provider>,
-*/

@@ -6,7 +6,8 @@ const Campus = require('../db/models').Campus
 
 campusRouter.get('/:id', (req, res)  => {
   const campusId = req.params.id
-  res.send('campuses here')
+  Campus.findById(campusId)
+  .then(campus => res.json(campus))
 })
 
 campusRouter.get('/', (req, res)  => {

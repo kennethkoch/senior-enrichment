@@ -13,10 +13,10 @@ export default class NavBar extends Component {
     return (
       <div>
         <div>
-          <Link to='./campuses'>Home</Link>
+          <Link to='/campuses'>Home</Link>
         </div>
         <div>
-          <Link to='./students'>Students</Link>
+          <Link to='/students'>Students</Link>
         </div>
       </div>
     )
