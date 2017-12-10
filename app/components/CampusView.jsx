@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import { Link } from 'react-router-dom';
 import store from '../store'
-import {gotCampuses} from '../store'
+import {fetchCampuses} from '../store'
 
 export default class CampusView extends Component {
   constructor() {
@@ -11,13 +10,9 @@ export default class CampusView extends Component {
   }
 
   componentDidMount() {
+    const thunk = fetchCampuses()
+    store.dispatch(thunk)
     this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
-    axios.get('/api/campuses')
-    .then(res => res.data)
-    .then((campuses) => {
-      const action = gotCampuses(campuses)
-      store.dispatch(action)
-    })
   }
 
   componentWillUnmount(){

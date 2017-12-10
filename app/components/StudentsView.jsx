@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import store from '../store'
-import {gotCampuses, gotStudents} from '../store'
+import {fetchCampuses, fetchStudents} from '../store'
 
 export default class StudentsView extends Component {
   constructor() {
@@ -11,17 +11,10 @@ export default class StudentsView extends Component {
 
 componentDidMount() {
   this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
-  axios.get('/api/students')
-  .then(res => res.data)
-  .then((students) => {
-    store.dispatch(gotStudents(students))
-  axios.get('/api/campuses')
-    .then(res => res.data)
-    .then(campuses => {
-      store.dispatch(gotCampuses(campuses))
-      // console.log(campuses);
-    })
-  })
+  const studentThunk = fetchStudents()
+  const campusThunk = fetchCampuses()
+  store.dispatch(studentThunk)
+  store.dispatch(campusThunk)
 }
 
 componentWillUnmount() {
