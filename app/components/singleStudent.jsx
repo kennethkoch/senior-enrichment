@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import store from '../store'
 import {fetchSingleStudent, fetchCampuses} from '../store'
+import { Link } from 'react-router-dom';
 
 export default class singleStudent extends Component {
   constructor() {
@@ -34,9 +34,9 @@ export default class singleStudent extends Component {
         <ul>
           <li>{student.email}</li>
           <li>{student.gpa}</li>
-          <li>{campuses.filter(campus => campus.id === campusId).map((campus) => {
+          <Link to={`/campuses/${campusId}`}><li>{campuses.filter(campus => campus.id === campusId).map((campus) => {
             return campus.name
-          })}</li>
+          })}</li></Link>
         </ul>
       </div>
     )

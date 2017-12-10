@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import store from '../store'
+import { Link } from 'react-router-dom';
 import {fetchCampuses, fetchStudents} from '../store'
 
 export default class StudentsView extends Component {
@@ -43,7 +43,7 @@ componentWillUnmount() {
           })
           return <tr key = {student.id}>
             <td>{student.id}</td>
-            <td>{student.firstName}</td>
+            <td><Link to={`/students/${student.id}`}>{student.firstName}</Link></td>
             <td>{thisCampus.name}</td>
           </tr>
         })}

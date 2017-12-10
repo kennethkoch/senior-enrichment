@@ -26,7 +26,7 @@ export default class CampusView extends Component {
       <div>
         <ul>
         {campuses.map(campus => {
-          return <li key={campus.id}> <Link onClick={() => <singleCampus />}to={`/campuses/${campus.id}`}> {campus.name} </Link> </li>
+          return <li key={campus.id}> <Link to={`/campuses/${campus.id}`}> {campus.name} </Link> </li>
         })}
         </ul>
       </div>
