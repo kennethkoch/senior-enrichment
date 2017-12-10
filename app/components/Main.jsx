@@ -7,6 +7,7 @@ import {browserHistory} from 'react-router'
 import { HashRouter as Router, Route, Switch, } from 'react-router-dom';
 import singleCampus from './singleCampus';
 import singleStudent from './singleStudent';
+import Index from './Index';
 
 
 
@@ -30,7 +31,7 @@ export default class Main extends Component {
           <Route path='/students/:id' component={singleStudent}/>
           <Route exact path='/campuses' component={CampusView}/>
           <Route path='/campuses/:id' component={singleCampus}/>
-          <Route component={CampusView}/>
+          <Route component={Index}/>
         </Switch>
         </div>
       </Router>
