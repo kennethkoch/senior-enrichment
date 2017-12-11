@@ -29,15 +29,7 @@ campusRouter.delete('/:id', (req,res,next) => {
   .then(() => res.status(204).end())
 })
 
-/**
-campusRouter.post()
-post a new campus to db
-
-campusRouter.put()
-update campus info for one campus
-
-campusRouter.delete()
-delete campus
-*/
+// campusRouter.put()
+// update campus info for one campus
 
 module.exports = campusRouter

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import store from '../store'
 import { Link } from 'react-router-dom';
-import {fetchCampuses, fetchStudents} from '../store'
+import {fetchCampuses, fetchStudents, deleteStudent} from '../store'
 import AddStudent from './AddStudent';
 
 export default class StudentsView extends Component {
   constructor() {
     super()
     this.state = store.getState()
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
@@ -22,8 +23,14 @@ export default class StudentsView extends Component {
   this.unsubscribe()
 }
 
-  handleClick() {
-    
+  handleClick(evt) {
+    evt.preventDefault()
+    console.log(evt.target);
+    console.log(evt.target.getAttribute('id'));
+    const studentId = evt.target.getAttribute('id')
+    console.log(studentId);
+    const thunk = deleteStudent(studentId)
+    store.dispatch(thunk)
   }
 
   render() {
@@ -49,7 +56,7 @@ export default class StudentsView extends Component {
             <td>{student.id}</td>
             <td><Link to={`/students/${student.id}`}>{student.firstName}</Link></td>
             <td><Link to={`/campuses/${thisCampus.id}`}>{thisCampus.name}</Link></td>
-            <td><button onClick={this.handleClick}>Delete Campus</button></td>
+            <td><button id={student.id} onClick={this.handleClick}>Delete Student</button></td>
           </tr>
         })}
       </table>

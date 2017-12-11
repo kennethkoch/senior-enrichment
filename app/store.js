@@ -169,6 +169,15 @@ export function deleteCampus(campusId) {
   }
 }
 
+export function deleteStudent(studentId) {
+  return function thunk(dispatch){
+    axios.delete(`/api/students/${studentId}`)
+    .then(() => {
+      dispatch(fetchStudents())
+    })
+  }
+}
+
 export function postStudent(firstName, lastName, email, gpa, campusId) {
   return function thunk(dispatch){
     axios.post('/api/students', { firstName: firstName, lastName: lastName,

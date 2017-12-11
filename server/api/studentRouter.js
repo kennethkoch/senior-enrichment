@@ -22,15 +22,13 @@ studentRouter.post('/', (req, res, next) => {
   .catch(next)
 })
 
-/**
-studentRouter.post()
-post a new student to db
+studentRouter.delete('/:id', (req, res, next) => {
+  Student.destroy({where:{id:req.params.id}})
+  .then(() => res.status(204).end())
+  .catch(next)
+})
 
-studentRouter.put()
-update student info for one student
-
-studentRouter.delete()
-delete student
-*/
+// studentRouter.put()
+// update student info for one student
 
 module.exports = studentRouter
