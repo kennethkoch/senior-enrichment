@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import store from '../store'
 import { Link } from 'react-router-dom';
 import {fetchCampuses, fetchStudents} from '../store'
+import AddStudent from './AddStudent';
 
 export default class StudentsView extends Component {
   constructor() {
@@ -9,7 +10,7 @@ export default class StudentsView extends Component {
     this.state = store.getState()
   }
 
-componentDidMount() {
+  componentDidMount() {
   this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
   const studentThunk = fetchStudents()
   const campusThunk = fetchCampuses()
@@ -17,11 +18,13 @@ componentDidMount() {
   store.dispatch(campusThunk)
 }
 
-componentWillUnmount() {
+  componentWillUnmount() {
   this.unsubscribe()
 }
 
-
+  handleClick() {
+    
+  }
 
   render() {
     const students = this.state.students
@@ -29,6 +32,7 @@ componentWillUnmount() {
 
     return (
       <div>
+      <div><Link to='/addStudent'>Add Student</Link></div>
       <table>
         <th>#</th>
         <th>Name</th>
@@ -44,7 +48,8 @@ componentWillUnmount() {
           return <tr key = {student.id}>
             <td>{student.id}</td>
             <td><Link to={`/students/${student.id}`}>{student.firstName}</Link></td>
-            <td>{thisCampus.name}</td>
+            <td><Link to={`/campuses/${thisCampus.id}`}>{thisCampus.name}</Link></td>
+            <td><button onClick={this.handleClick}>Delete Campus</button></td>
           </tr>
         })}
       </table>

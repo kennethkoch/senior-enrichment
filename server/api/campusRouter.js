@@ -16,6 +16,19 @@ campusRouter.get('/', (req, res)  => {
 })
 
 
+campusRouter.post('/', (req, res, next) => {
+  Campus.create(req.body)
+  .then(campus => res.json(campus))
+  .catch(next)
+})
+
+campusRouter.delete('/:id', (req,res,next) => {
+  const campusId = req.params.id
+  console.log(campusId);
+  Campus.destroy({where:{id:campusId}})
+  .then(() => res.status(204).end())
+})
+
 /**
 campusRouter.post()
 post a new campus to db

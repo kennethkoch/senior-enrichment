@@ -8,6 +8,8 @@ import { HashRouter as Router, Route, Switch, } from 'react-router-dom';
 import singleCampus from './singleCampus';
 import singleStudent from './singleStudent';
 import Index from './Index';
+import AddCampus from './AddCampus';
+import AddStudent from './AddStudent';
 
 
 
@@ -29,6 +31,8 @@ export default class Main extends Component {
         <Switch>
           <Route exact path='/students' component={StudentsView}/>
           <Route path='/students/:id' component={singleStudent}/>
+          <Route path='/addCampus/' component={AddCampus}/>
+          <Route path='/addStudent/' component={AddStudent}/>
           <Route exact path='/campuses' component={CampusView}/>
           <Route path='/campuses/:id' component={singleCampus}/>
           <Route component={Index}/>

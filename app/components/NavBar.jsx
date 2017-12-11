@@ -11,13 +11,9 @@ export default class NavBar extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <Link to='/campuses'>View Campuses</Link>
-        </div>
-        <div>
-          <Link to='/students'>View Students</Link>
-        </div>
+      <div className='navbar' id='nav'>
+          <Link to='/campuses'><div className='nav-button'>View Campuses</div></Link>
+          <Link to='/students'><div className='nav-button'>View Students</div></Link>
       </div>
     )
   }
