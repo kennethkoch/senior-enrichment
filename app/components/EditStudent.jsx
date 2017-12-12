@@ -1,8 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import store from '../store';
-import {addStudentFirstName, addStudentLastName, addStudentEmail, addStudentGpa,
-        addStudentCampus, updateStudent, fetchStudents, newStudentEntry, fetchSingleStudent} from '../store';
-//make action creators for changing all fields of newStudentEntry
+import {
+  addStudentFirstName,
+  addStudentLastName,
+  addStudentEmail,
+  addStudentGpa,
+  addStudentCampus,
+  updateStudent,
+  fetchStudents,
+  newStudentEntry,
+  fetchSingleStudent
+} from '../store';
+
 export default class EditStudent extends Component {
   constructor() {
     super()
@@ -15,41 +24,41 @@ export default class EditStudent extends Component {
     this.handleCampusChange = this.handleCampusChange.bind(this)
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
     const thunk = fetchSingleStudent(this.props.match.params.id)
     store.dispatch(thunk)
 
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.unsubscribe()
   }
-  ///change these to match newStudentEntry fields
-  handleFirstNameChange(evt){
+
+  handleFirstNameChange(evt) {
     store.dispatch(addStudentFirstName(evt.target.value))
     const newStudent = this.state.newStudentEntry;
     store.dispatch(newStudentEntry(newStudent))
   }
-  handleLastNameChange(evt){
+  handleLastNameChange(evt) {
     store.dispatch(addStudentLastName(evt.target.value))
     const newStudent = this.state.newStudentEntry;
     store.dispatch(newStudentEntry(newStudent))
   }
 
-  handleEmailChange(evt){
+  handleEmailChange(evt) {
     store.dispatch(addStudentEmail(evt.target.value))
     const newStudent = this.state.newStudentEntry;
     store.dispatch(newStudentEntry(newStudent))
   }
 
-  handleGpaChange(evt){
+  handleGpaChange(evt) {
     store.dispatch(addStudentGpa(evt.target.value))
     const newStudent = this.state.newStudentEntry;
     store.dispatch(newStudentEntry(newStudent))
   }
 
-  handleCampusChange(evt){
+  handleCampusChange(evt) {
     const newStudentCampus = this.state.campuses.filter(campus => {
       return campus.name === evt.target.value
     })
@@ -59,7 +68,7 @@ export default class EditStudent extends Component {
     store.dispatch(newStudentEntry(newStudent))
   }
 
-  handleSubmit(evt){
+  handleSubmit(evt) {
     evt.preventDefault()
     let update;
     const student = this.state.newStudentEntry;
@@ -76,62 +85,35 @@ export default class EditStudent extends Component {
     this.props.history.replace('/students')
   }
 
-
-
   render() {
     const currentStudent = this.state.currentStudent
-    return (
-      <div>
+    return (<div>
       <h1>Edit Student: {currentStudent.name}</h1>
       <ul>
-      <form onSubmit={this.handleSubmit}>
-      <input
-      type='text'
-      name='firstName'
-      onChange={this.handleFirstNameChange}
-      placeholder={currentStudent.firstName}>
-      </input>
-      <input type='submit' value='Submit Changes'></input>
-      </form>
-      <form onSubmit={this.handleSubmit}>
-      <input
-      type='text'
-      name='lastName'
-      onChange={this.handleLastNameChange}
-      placeholder={currentStudent.lastName}>
-      </input>
-      <input type='submit' value='Submit Changes'></input>
-      </form>
-      <form onSubmit={this.handleSubmit}>
-      <input
-      type='text'
-      name='email'
-      onChange={this.handleEmailChange}
-      placeholder={currentStudent.email}></input>
-      <input type='submit' value='Submit Changes'></input>
-      </form>
-      <form onSubmit={this.handleSubmit}>
-      <input
-      type='number'
-      step='0.1'
-      name='gpa'
-      onChange={this.handleGpaChange}
-      placeholder='GPA'></input>
-      <input type='submit' value='Submit Changes'></input>
-      </form>
-      <form onSubmit={this.handleSubmit}>
-      <input
-      type='text'
-      name='campus'
-      onChange={this.handleCampusChange}
-      placeholder='Campus Name'></input>
-      <input type='submit' value='Submit Changes'></input>
-      </form>
+        <form onSubmit={this.handleSubmit}>
+          <input type='text' name='firstName' onChange={this.handleFirstNameChange} placeholder={currentStudent.firstName}></input>
+          <input type='submit' value='Submit Changes'></input>
+        </form>
+        <form onSubmit={this.handleSubmit}>
+          <input type='text' name='lastName' onChange={this.handleLastNameChange} placeholder={currentStudent.lastName}></input>
+          <input type='submit' value='Submit Changes'></input>
+        </form>
+        <form onSubmit={this.handleSubmit}>
+          <input type='text' name='email' onChange={this.handleEmailChange} placeholder={currentStudent.email}></input>
+          <input type='submit' value='Submit Changes'></input>
+        </form>
+        <form onSubmit={this.handleSubmit}>
+          <input type='number' step='0.1' name='gpa' onChange={this.handleGpaChange} placeholder='GPA'></input>
+          <input type='submit' value='Submit Changes'></input>
+        </form>
+        <form onSubmit={this.handleSubmit}>
+          <input type='text' name='campus' onChange={this.handleCampusChange} placeholder='Campus Name'></input>
+          <input type='submit' value='Submit Changes'></input>
+        </form>
 
       </ul>
 
-      </div>
-    )
+    </div>)
   }
 
 }

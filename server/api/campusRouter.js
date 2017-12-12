@@ -24,7 +24,6 @@ campusRouter.post('/', (req, res, next) => {
 
 campusRouter.delete('/:id', (req,res,next) => {
   const campusId = req.params.id
-  console.log(campusId);
   Campus.destroy({where:{id:campusId}})
   .then(() => res.status(204).end())
 })
