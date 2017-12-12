@@ -1,7 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import store from '../store';
-import {addCampusName, addCampusImage, addCampusDescription, updateCampus,
-        fetchCampuses, newCampusEntry, fetchSingleCampus} from '../store';
+import {
+  addCampusName,
+  addCampusImage,
+  addCampusDescription,
+  updateCampus,
+  fetchCampuses,
+  newCampusEntry,
+  fetchSingleCampus
+} from '../store';
 
 export default class EditCampus extends Component {
   constructor() {
@@ -13,34 +20,35 @@ export default class EditCampus extends Component {
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
     const thunk = fetchSingleCampus(this.props.match.params.id)
+    store.dispatch(thunk)
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.unsubscribe()
   }
 
-  handleNameChange(evt){
+  handleNameChange(evt) {
     store.dispatch(addCampusName(evt.target.value))
     const newCampus = this.state.newCampusEntry;
     store.dispatch(newCampusEntry(newCampus))
   }
 
-  handleImageChange(evt){
+  handleImageChange(evt) {
     store.dispatch(addCampusImage(evt.target.value))
     const newCampus = this.state.newCampusEntry;
     store.dispatch(newCampusEntry(newCampus))
   }
 
-  handleDescriptionChange(evt){
+  handleDescriptionChange(evt) {
     store.dispatch(addCampusDescription(evt.target.value))
     const newCampus = this.state.newCampusEntry;
     store.dispatch(newCampusEntry(newCampus))
   }
 
-  handleSubmit(evt){
+  handleSubmit(evt) {
     evt.preventDefault()
     let update;
     const campus = this.state.newCampusEntry;
@@ -58,34 +66,26 @@ export default class EditCampus extends Component {
     this.props.history.replace('/campuses')
   }
 
-
-
   render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-          type='text'
-          name='name'
-          onChange={this.handleNameChange}
-          placeholder='name'>
-          </input>
-          <input
-          type='text'
-          name='imageUrl'
-          onChange={this.handleImageChange}
-          placeholder='imageUrl'>
-          </input>
-          <input
-          type='text'
-          name='description'
-          onChange={this.handleDescriptionChange}
-          placeholder='description'></input>
-          <input type='submit'></input>
-        </form>
+    const currentCampus = this.state.currentCampus
+    return (<div>
 
-      </div>
-    )
+      <form onSubmit={this.handleSubmit}>
+        <input type='text' name='name' onChange={this.handleNameChange}  placeholder={currentCampus.name}></input>
+        <input type='submit' value='Update'></input>
+      </form>
+
+      <form onSubmit={this.handleSubmit}>
+        <input type='text' name='imageUrl' onChange={this.handleImageChange}  placeholder='Insert New Image URL'></input>
+        <input type='submit' value='Update'></input>
+      </form>
+
+      <form onSubmit={this.handleSubmit}>
+        <input type='text' name='description' onChange={this.handleDescriptionChange}  placeholder='Add New Campus Description'></input>
+        <input type='submit' value='Update'></input>
+      </form>
+
+    </div>)
   }
 
 }

@@ -29,16 +29,19 @@ a {
 
 
 
-#addCampus:hover{
+#add:hover{
   color: black;
   background-color: #669368;
 }
 
-#addCampus {
-  color: #77a579;
+#add {
+  color: #91b8bc;
+  background-color: #333;
   text-decoration: none;
 }
-#addCampus a:hover {
+
+
+#add a:hover {
   color: black;
 }
 

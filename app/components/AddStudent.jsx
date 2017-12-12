@@ -1,8 +1,16 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import store from '../store';
-import {addStudentFirstName, addStudentLastName, addStudentEmail, addStudentGpa,
-        addStudentCampus, postStudent, fetchCampuses, newStudentEntry} from '../store';
-//make action creators for changing all fields of newStudentEntry
+import {
+  addStudentFirstName,
+  addStudentLastName,
+  addStudentEmail,
+  addStudentGpa,
+  addStudentCampus,
+  postStudent,
+  fetchCampuses,
+  newStudentEntry
+} from '../store';
+
 export default class AddCampus extends Component {
   constructor() {
     super()
@@ -15,38 +23,38 @@ export default class AddCampus extends Component {
     this.handleCampusChange = this.handleCampusChange.bind(this)
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.unsubscribe()
   }
-  ///change these to match newStudentEntry fields
-  handleFirstNameChange(evt){
+
+  handleFirstNameChange(evt) {
     store.dispatch(addStudentFirstName(evt.target.value))
     const newStudent = this.state.newStudentEntry;
     store.dispatch(newStudentEntry(newStudent))
   }
-  handleLastNameChange(evt){
+  handleLastNameChange(evt) {
     store.dispatch(addStudentLastName(evt.target.value))
     const newStudent = this.state.newStudentEntry;
     store.dispatch(newStudentEntry(newStudent))
   }
 
-  handleEmailChange(evt){
+  handleEmailChange(evt) {
     store.dispatch(addStudentEmail(evt.target.value))
     const newStudent = this.state.newStudentEntry;
     store.dispatch(newStudentEntry(newStudent))
   }
 
-  handleGpaChange(evt){
+  handleGpaChange(evt) {
     store.dispatch(addStudentGpa(evt.target.value))
     const newStudent = this.state.newStudentEntry;
     store.dispatch(newStudentEntry(newStudent))
   }
 
-  handleCampusChange(evt){
+  handleCampusChange(evt) {
     const newStudentCampus = this.state.campuses.filter(campus => {
       return campus.name === evt.target.value
     })
@@ -57,7 +65,7 @@ export default class AddCampus extends Component {
     store.dispatch(newStudentEntry(newStudent))
   }
 
-  handleSubmit(evt){
+  handleSubmit(evt) {
     evt.preventDefault()
     const newStudent = this.state.newStudentEntry
     const firstName = this.state.newStudentEntry.firstName;
@@ -71,45 +79,18 @@ export default class AddCampus extends Component {
     this.props.history.replace('/students')
   }
 
-
-
   render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-          type='text'
-          name='firstName'
-          onChange={this.handleFirstNameChange}
-          placeholder='First Name'>
-          </input>
-          <input
-          type='text'
-          name='lastName'
-          onChange={this.handleLastNameChange}
-          placeholder='Last Name'>
-          </input>
-          <input
-          type='text'
-          name='email'
-          onChange={this.handleEmailChange}
-          placeholder='email'></input>
-          <input
-          type='number'
-          step='0.1'
-          name='gpa'
-          onChange={this.handleGpaChange}
-          placeholder='GPA'></input>
-          <input
-          type='text'
-          name='campus'
-          onChange={this.handleCampusChange}
-          placeholder='Campus Name'></input>
-          <input type='submit'></input>
-        </form>
+    return (<div>
+      <form onSubmit={this.handleSubmit}>
+        <input type='text' name='firstName' onChange={this.handleFirstNameChange} placeholder='First Name'></input>
+        <input type='text' name='lastName' onChange={this.handleLastNameChange} placeholder='Last Name'></input>
+        <input type='text' name='email' onChange={this.handleEmailChange} placeholder='email'></input>
+        <input type='number' step='0.1' name='gpa' onChange={this.handleGpaChange} placeholder='GPA'></input>
+        <input type='text' name='campus' onChange={this.handleCampusChange} placeholder='Campus Name'></input>
+        <input type='submit'></input>
+      </form>
 
-      </div>
-    )
+    </div>)
   }
 
 }

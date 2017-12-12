@@ -36,7 +36,7 @@ export default class StudentsView extends Component {
 
     return (
       <div>
-      <div><Link to='/addStudent'>Add Student</Link></div>
+      <div><Link to='/addStudent'><div className='nav-button' id='add'>Add Student</div></Link></div>
       <table>
         <th>#</th>
         <th>Name</th>
