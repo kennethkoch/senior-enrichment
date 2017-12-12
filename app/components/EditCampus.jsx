@@ -71,17 +71,17 @@ export default class EditCampus extends Component {
     return (<div>
 
       <form onSubmit={this.handleSubmit}>
-        <input type='text' name='name' onChange={this.handleNameChange}  placeholder={currentCampus.name}></input>
+        <input type='text' name='name' onChange={this.handleNameChange} placeholder={currentCampus.name}></input>
         <input type='submit' value='Update'></input>
       </form>
 
       <form onSubmit={this.handleSubmit}>
-        <input type='text' name='imageUrl' onChange={this.handleImageChange}  placeholder='Insert New Image URL'></input>
+        <input type='text' name='imageUrl' onChange={this.handleImageChange} placeholder='Insert New Image URL'></input>
         <input type='submit' value='Update'></input>
       </form>
 
       <form onSubmit={this.handleSubmit}>
-        <input type='text' name='description' onChange={this.handleDescriptionChange}  placeholder='Add New Campus Description'></input>
+        <input type='text' name='description' onChange={this.handleDescriptionChange} placeholder='Add New Campus Description'></input>
         <input type='submit' value='Update'></input>
       </form>
 
