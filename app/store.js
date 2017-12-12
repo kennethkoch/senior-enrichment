@@ -6,7 +6,7 @@ import rootReducer from './reducers';
 import { GOT_CAMPUSES, GOT_STUDENTS, GOT_SINGLE_CAMPUS, NEW_CAMPUS_IMAGE,
          NEW_CAMPUS_DESCRIPTION, NEW_CAMPUS_ENTRY, NEW_CAMPUS_NAME, GOT_SINGLE_STUDENT,
          NEW_STUDENT_ENTRY, NEW_STUDENT_GPA, NEW_STUDENT_EMAIL, NEW_STUDENT_LAST_NAME,
-         NEW_STUDENT_FIRST_NAME, NEW_STUDENT_CAMPUS} from './reducers/constants';
+         NEW_STUDENT_FIRST_NAME, NEW_STUDENT_CAMPUS, UPDATE_STUDENT} from './reducers/constants';
 
 
 //action creators
@@ -173,6 +173,15 @@ export function deleteStudent(studentId) {
   return function thunk(dispatch){
     axios.delete(`/api/students/${studentId}`)
     .then(() => {
+      dispatch(fetchStudents())
+    })
+  }
+}
+export function updateStudent(studentId, update) {
+  return function thunk(dispatch){
+    axios.put(`/api/students/${studentId}`, update)
+    .then((res) => res.data)
+    .then((student) => {
       dispatch(fetchStudents())
     })
   }

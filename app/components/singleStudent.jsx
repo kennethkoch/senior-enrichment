@@ -19,9 +19,17 @@ export default class singleStudent extends Component {
 
   }
 
-
   componentWillUnmount () {
     this.unsubscribe()
+  }
+
+
+  list (){
+    {if (true) {
+      return (
+        <div>can i do this</div>
+      )
+    }}
   }
 
   render() {
@@ -31,10 +39,11 @@ export default class singleStudent extends Component {
     return (
       <div>
         <h1>{student.name}</h1>
+        <list />
         <ul>
           <li>{student.email}</li>
           <li>{student.gpa}</li>
-          <Link to={`/campuses/${campusId}`}><li>{campuses.filter(campus => campus.id === campusId).map((campus) => {
+          <Link id={student.id} to={`/campuses/${campusId}`}><li>{campuses.filter(campus => campus.id === campusId).map((campus) => {
             return campus.name
           })}</li></Link>
         </ul>

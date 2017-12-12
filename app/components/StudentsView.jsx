@@ -25,10 +25,7 @@ export default class StudentsView extends Component {
 
   handleClick(evt) {
     evt.preventDefault()
-    console.log(evt.target);
-    console.log(evt.target.getAttribute('id'));
     const studentId = evt.target.getAttribute('id')
-    console.log(studentId);
     const thunk = deleteStudent(studentId)
     store.dispatch(thunk)
   }
@@ -56,6 +53,7 @@ export default class StudentsView extends Component {
             <td>{student.id}</td>
             <td><Link to={`/students/${student.id}`}>{student.firstName}</Link></td>
             <td><Link to={`/campuses/${thisCampus.id}`}>{thisCampus.name}</Link></td>
+            <td><Link to={`/editStudent/${student.id}`}><button>edit student</button></Link></td>
             <td><button id={student.id} onClick={this.handleClick}>Delete Student</button></td>
           </tr>
         })}

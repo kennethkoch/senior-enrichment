@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import store from '../store';
 import {addStudentFirstName, addStudentLastName, addStudentEmail, addStudentGpa,
-        addStudentCampus, postStudent, fetchCampuses, newStudentEntry} from '../store';
+        addStudentCampus, updateStudent, fetchStudents, newStudentEntry, fetchSingleStudent} from '../store';
 //make action creators for changing all fields of newStudentEntry
-export default class AddCampus extends Component {
+export default class EditStudent extends Component {
   constructor() {
     super()
     this.state = store.getState()
@@ -17,6 +17,9 @@ export default class AddCampus extends Component {
 
   componentDidMount(){
     this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
+    const thunk = fetchSingleStudent(this.props.match.params.id)
+    store.dispatch(thunk)
+
   }
 
   componentWillUnmount(){
@@ -51,7 +54,6 @@ export default class AddCampus extends Component {
       return campus.name === evt.target.value
     })
     let campusId = newStudentCampus.map(campus => campus.id)[0];
-
     store.dispatch(addStudentCampus(campusId))
     const newStudent = this.state.newStudentEntry;
     store.dispatch(newStudentEntry(newStudent))
@@ -59,54 +61,75 @@ export default class AddCampus extends Component {
 
   handleSubmit(evt){
     evt.preventDefault()
-    const newStudent = this.state.newStudentEntry
-    const firstName = this.state.newStudentEntry.firstName;
-    const lastName = this.state.newStudentEntry.lastName;
-    const email = this.state.newStudentEntry.email;
-    const gpa = this.state.newStudentEntry.gpa;
-    const campusId = this.state.newStudentEntry.campusId;
-    const thunk = postStudent(firstName, lastName, email, gpa, campusId);
+    let update;
+    const student = this.state.newStudentEntry;
+    for (var updatedField in student) {
+      if (student[updatedField]) {
+        update = {
+          [updatedField]: student[updatedField]
+        }
+      }
+    }
+    const studentId = this.props.match.params.id;
+    const thunk = updateStudent(studentId, update)
     store.dispatch(thunk)
-    store.dispatch(newStudentEntry(this.state.newStudentEntry))
+    store.dispatch(updateStudent())
     this.props.history.replace('/students')
   }
 
 
 
   render() {
+    const currentStudent = this.state.currentStudent
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-          type='text'
-          name='firstName'
-          onChange={this.handleFirstNameChange}
-          placeholder='First Name'>
-          </input>
-          <input
-          type='text'
-          name='lastName'
-          onChange={this.handleLastNameChange}
-          placeholder='Last Name'>
-          </input>
-          <input
-          type='text'
-          name='email'
-          onChange={this.handleEmailChange}
-          placeholder='email'></input>
-          <input
-          type='number'
-          step='0.1'
-          name='gpa'
-          onChange={this.handleGpaChange}
-          placeholder='GPA'></input>
-          <input
-          type='text'
-          name='campus'
-          onChange={this.handleCampusChange}
-          placeholder='Campus Name'></input>
-          <input type='submit'></input>
-        </form>
+      <h1>Edit Student: {currentStudent.name}</h1>
+      <ul>
+      <form onSubmit={this.handleSubmit}>
+      <input
+      type='text'
+      name='firstName'
+      onChange={this.handleFirstNameChange}
+      placeholder={currentStudent.firstName}>
+      </input>
+      <input type='submit' value='Submit Changes'></input>
+      </form>
+      <form onSubmit={this.handleSubmit}>
+      <input
+      type='text'
+      name='lastName'
+      onChange={this.handleLastNameChange}
+      placeholder={currentStudent.lastName}>
+      </input>
+      <input type='submit' value='Submit Changes'></input>
+      </form>
+      <form onSubmit={this.handleSubmit}>
+      <input
+      type='text'
+      name='email'
+      onChange={this.handleEmailChange}
+      placeholder={currentStudent.email}></input>
+      <input type='submit' value='Submit Changes'></input>
+      </form>
+      <form onSubmit={this.handleSubmit}>
+      <input
+      type='number'
+      step='0.1'
+      name='gpa'
+      onChange={this.handleGpaChange}
+      placeholder='GPA'></input>
+      <input type='submit' value='Submit Changes'></input>
+      </form>
+      <form onSubmit={this.handleSubmit}>
+      <input
+      type='text'
+      name='campus'
+      onChange={this.handleCampusChange}
+      placeholder='Campus Name'></input>
+      <input type='submit' value='Submit Changes'></input>
+      </form>
+
+      </ul>
 
       </div>
     )

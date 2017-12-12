@@ -1,7 +1,7 @@
 /* combineReducers is not currently used, but eventually should be for modular code :D */
 import { combineReducers } from 'redux'
 import {GOT_CAMPUSES, GOT_STUDENTS, GOT_SINGLE_CAMPUS, GOT_SINGLE_STUDENT,
-        NEW_CAMPUS_ENTRY, NEW_CAMPUS_NAME, NEW_CAMPUS_IMAGE,
+        NEW_CAMPUS_ENTRY, NEW_CAMPUS_NAME, NEW_CAMPUS_IMAGE, UPDATE_STUDENT,
         NEW_CAMPUS_DESCRIPTION, NEW_STUDENT_ENTRY, NEW_STUDENT_GPA,
         NEW_STUDENT_EMAIL, NEW_STUDENT_LAST_NAME, NEW_STUDENT_FIRST_NAME, NEW_STUDENT_CAMPUS} from './constants'
 //import student entry constants
@@ -71,6 +71,8 @@ const rootReducer = function(prevState = initialState, action) {
                                                             gpa:prevState.newStudentEntry.gpa,
                                                             campusId: action.campusId}})
     case NEW_STUDENT_ENTRY:
+      return Object.assign({}, prevState, {students: prevState.students.concat(action.newStudentEntry)})
+    case UPDATE_STUDENT:
       return Object.assign({}, prevState, {students: prevState.students.concat(action.newStudentEntry)})
     default:
       return prevState;

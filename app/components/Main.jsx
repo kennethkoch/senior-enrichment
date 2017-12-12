@@ -10,6 +10,7 @@ import singleStudent from './singleStudent';
 import Index from './Index';
 import AddCampus from './AddCampus';
 import AddStudent from './AddStudent';
+import EditStudent from './EditStudent';
 
 
 
@@ -33,6 +34,7 @@ export default class Main extends Component {
           <Route path='/students/:id' component={singleStudent}/>
           <Route path='/addCampus/' component={AddCampus}/>
           <Route path='/addStudent/' component={AddStudent}/>
+          <Route path='/editStudent/:id' component={EditStudent}/>
           <Route exact path='/campuses' component={CampusView}/>
           <Route path='/campuses/:id' component={singleCampus}/>
           <Route component={Index}/>

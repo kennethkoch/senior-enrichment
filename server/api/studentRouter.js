@@ -27,8 +27,21 @@ studentRouter.delete('/:id', (req, res, next) => {
   .then(() => res.status(204).end())
   .catch(next)
 })
+studentRouter.put('/:id', (req, res, next) => {
+  Student.update(req.body,{where:{id:req.params.id}})
+  .then(result => {
+    Student.findById(req.params.id)
+    .then(student => {
+      res.send(student);
+    })
+  })
+  .catch(next)
+  // Student.findById(req.params.id)
+  // .then(student => {
+  //   student.update(req.body)
+  // })
+})
 
-// studentRouter.put()
 // update student info for one student
 
 module.exports = studentRouter
