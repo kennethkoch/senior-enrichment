@@ -177,12 +177,21 @@ export function deleteStudent(studentId) {
     })
   }
 }
+
 export function updateStudent(studentId, update) {
   return function thunk(dispatch){
     axios.put(`/api/students/${studentId}`, update)
-    .then((res) => res.data)
     .then((student) => {
       dispatch(fetchStudents())
+    })
+  }
+}
+
+export function updateCampus(campusId, update) {
+  return function thunk(dispatch){
+    axios.put(`/api/campuses/${campusId}`, update)
+    .then((campus) => {
+      dispatch(fetchCampuses())
     })
   }
 }

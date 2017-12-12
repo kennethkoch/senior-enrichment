@@ -37,6 +37,7 @@ export default class CampusView extends Component {
         {campuses.map(campus => {
           return <li key={campus.name}>
           <Link to={`/campuses/${campus.id}`}> {campus.name} </Link>
+          <Link to={`/editCampus/${campus.id}`}><button>Edit Campus</button></Link>
           <button id={campus.id} onClick={this.handleClick}>Delete Campus</button>
           </li>
         })}

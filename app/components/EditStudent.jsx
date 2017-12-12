@@ -73,7 +73,6 @@ export default class EditStudent extends Component {
     const studentId = this.props.match.params.id;
     const thunk = updateStudent(studentId, update)
     store.dispatch(thunk)
-    store.dispatch(updateStudent())
     this.props.history.replace('/students')
   }
 

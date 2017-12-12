@@ -36,12 +36,6 @@ studentRouter.put('/:id', (req, res, next) => {
     })
   })
   .catch(next)
-  // Student.findById(req.params.id)
-  // .then(student => {
-  //   student.update(req.body)
-  // })
 })
-
-// update student info for one student
 
 module.exports = studentRouter

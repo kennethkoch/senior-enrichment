@@ -11,6 +11,7 @@ import Index from './Index';
 import AddCampus from './AddCampus';
 import AddStudent from './AddStudent';
 import EditStudent from './EditStudent';
+import EditCampus from './EditCampus';
 
 
 
@@ -35,6 +36,7 @@ export default class Main extends Component {
           <Route path='/addCampus/' component={AddCampus}/>
           <Route path='/addStudent/' component={AddStudent}/>
           <Route path='/editStudent/:id' component={EditStudent}/>
+          <Route path='/editCampus/:id' component={EditCampus}/>
           <Route exact path='/campuses' component={CampusView}/>
           <Route path='/campuses/:id' component={singleCampus}/>
           <Route component={Index}/>

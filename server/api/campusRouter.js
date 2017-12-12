@@ -29,7 +29,15 @@ campusRouter.delete('/:id', (req,res,next) => {
   .then(() => res.status(204).end())
 })
 
-// campusRouter.put()
-// update campus info for one campus
+campusRouter.put('/:id', (req, res, next) => {
+  Campus.update(req.body,{where:{id:req.params.id}})
+  .then(result => {
+    Campus.findById(req.params.id)
+    .then(student => {
+      res.send(student);
+    })
+  })
+  .catch(next)
+})
 
 module.exports = campusRouter
